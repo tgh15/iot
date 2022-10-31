@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IOT Project By Tgh15</title>
+    <!-- <script src="https://cdn.tailwindcss.com"></script> -->
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Toggle A */
+        input:checked~.dot {
+            transform: translateX(100%);
+            background-color: #48bb78;
+        }
+
+        /* Toggle B */
+        input:checked~.dot {
+            transform: translateX(100%);
+            background-color: #48bb78;
+        }
+
+        @import url(https://fonts.googleapis.com/css?family=Roboto:900);
+
+        body,
+        html {
+            height: 100%;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+
+        body {
+            background: #aecad8;
+            transition: all 0.14s ease-in;
+        }
+
+        body.active {
+            background: #f3f7f9;
+        }
+
+        .container {
+            margin: auto;
+            width: 212px;
+        }
+
+        .power {
+            margin: auto;
+            margin-top: 20px;
+            background: #38434a;
+            border-radius: 5px;
+            color: white;
+            cursor: pointer;
+            font-family: Roboto;
+            font-size: 1.9em;
+            height: 65px;
+            letter-spacing: 0.2px;
+            line-height: 65px;
+            text-align: center;
+            user-select: none;
+            width: 150px;
+            transition: none;
+        }
+
+        .power:hover {
+            background: #414e56;
+        }
+
+        .power:active {
+            box-shadow: inset 0px 4px 10px 0px #2d363b;
+            transition: background 0.14s ease-in;
+        }
+
+        .active .power {
+            background: #58c48d;
+        }
+
+        .active .power:active {
+            box-shadow: inset 0px 6px 8px -1px #41b77b;
+        }
+
+        #on {
+            transform: translate(50%, 50%) scale(0);
+            opacity: 0;
+        }
+
+        .active #on {
+            opacity: 1;
+            transform: translate(0) scale(1);
+            transition: all 0.14s ease-in;
+        }
+
+        .fancy-bulb {
+            position: relative;
+        }
+
+        .streaks,
+        .streaks:after,
+        .streaks:before {
+            position: absolute;
+            background: #ffdb55;
+            border-radius: 5.5px;
+            height: 11px;
+        }
+
+        .streaks:after,
+        .streaks:before {
+            content: "";
+            display: block;
+        }
+
+        .streaks:before {
+            bottom: 65px;
+        }
+
+        .streaks:after {
+            top: 65px;
+        }
+
+        .left-streaks {
+            right: 217px;
+            top: 89.5px;
+        }
+
+        .active .left-streaks {
+            animation: move-left 0.38s ease-out, width-to-zero 0.38s ease-out;
+            animation-delay: 0.14s;
+        }
+
+        .left-streaks:before,
+        .left-streaks:after {
+            left: 15px;
+        }
+
+        .active .left-streaks:before {
+            animation: width-to-zero 0.38s ease-out, move-up 0.38s ease-out;
+            animation-delay: 0.14s;
+        }
+
+        .active .left-streaks:after {
+            animation: width-to-zero 0.38s ease-out, move-down 0.38s ease-out;
+            animation-delay: 0.14s;
+        }
+
+        .right-streaks {
+            left: 217px;
+            top: 89.5px;
+        }
+
+        .active .right-streaks {
+            animation: move-right 0.38s ease-out, width-to-zero 0.38s ease-out;
+            animation-delay: 0.14s;
+        }
+
+        .right-streaks:before,
+        .right-streaks:after {
+            right: 15px;
+        }
+
+        .active .right-streaks:before {
+            animation: width-to-zero 0.38s ease-out, move-up 0.38s ease-out;
+            animation-delay: 0.14s;
+        }
+
+        .active .right-streaks:after {
+            animation: width-to-zero 0.38s ease-out, move-down 0.38s ease-out;
+            animation-delay: 0.14s;
+        }
+
+        .left-streaks:before,
+        .right-streaks:after {
+            transform: rotate(34deg);
+        }
+
+        .left-streaks:after,
+        .right-streaks:before {
+            transform: rotate(- 34deg);
+        }
+
+        @keyframes move-left {
+            0% {
+                transform: none;
+            }
+
+            65% {
+                transform: translateX(-80px);
+            }
+
+            100% {
+                transform: translateX(-80px);
+            }
+        }
+
+        @keyframes move-right {
+            0% {
+                transform: none;
+            }
+
+            65% {
+                transform: translateX(80px);
+            }
+
+            100% {
+                transform: translateX(80px);
+            }
+        }
+
+        @keyframes width-to-zero {
+            0% {
+                width: 50px;
+            }
+
+            100% {
+                width: 11px;
+            }
+        }
+
+        @keyframes move-up {
+            100% {
+                bottom: 100.75px;
+            }
+        }
+
+        @keyframes move-down {
+            100% {
+                top: 100.75px;
+            }
+        }
+    </style>
+    <!-- <link rel="stylesheet" href="style.scss"> -->
+</head>
+
+<body>
+ 
+
+    <div class="container" style="width: 18%;">
+        <div class="fancy-bulb">
+            <div class="left-streaks streaks"></div>
+            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
+                y="0px" viewBox="0 0 275.3 413.3" enable-background="new 0 0 275.3 413.3" xml:space="preserve">
+                <g id="off">
+                    <path fill="#E2ECF1" d="M137.7,13.7C67.2,13.7,10,70.9,10,141.4c0,58.3,72.8,118.2,79.9,162.3h47.8h47.8
+              c7.1-44,79.9-103.9,79.9-162.3C265.3,70.9,208.2,13.7,137.7,13.7z" />
+                </g>
+                <g id="on">
+                    <path fill="#FFDB55" d="M137.7,13.7C67.2,13.7,10,70.9,10,141.4c0,58.3,72.8,118.2,79.9,162.3h47.8h47.8
+              c7.1-44,79.9-103.9,79.9-162.3C265.3,70.9,208.2,13.7,137.7,13.7z" />
+
+                </g>
+
+                <g id="outline">
+                    <path fill="#F1F2F2" stroke="#38434A" stroke-width="19.1022" stroke-miterlimit="10" d="M168.5,375.5h-61.7c-8.9,0-16-7.2-16-16
+              v-55.8h93.8v55.8C184.6,368.3,177.4,375.5,168.5,375.5z" />
+                    <path fill="#F1F2F2" stroke="#38434A" stroke-width="19.1022" stroke-miterlimit="10" d="M151.2,401.5h-27.1c-3.9,0-7-3.2-7-7v-19
+              h41.1v19C158.2,398.4,155.1,401.5,151.2,401.5z" />
+                    <line fill="none" stroke="#38434A" stroke-width="19.1022" stroke-miterlimit="10" x1="184.6"
+                        y1="339.6" x2="90.8" y2="339.6" />
+                    <path fill="none" stroke="#38434A" stroke-width="19.1022" stroke-miterlimit="10"
+                        d="M137.7,13.7C67.2,13.7,10,70.9,10,141.4
+              c0,58.3,72.8,118.2,79.9,162.3h47.8h47.8c7.1-44,79.9-103.9,79.9-162.3C265.3,70.9,208.2,13.7,137.7,13.7z" />
+                </g>
+                <g id="highlight">
+                    <path fill="#FFDB55" stroke="#FFFFFF" stroke-width="21.0124" stroke-linecap="round"
+                        stroke-miterlimit="10" d="M207.1,89.5
+              c-12.3-16.1-28.4-29.1-46.9-37.8" />
+                    <path fill="#FFDB55" stroke="#FFFFFF" stroke-width="21.0124" stroke-linecap="round"
+                        stroke-miterlimit="10" d="M225,121.4
+              c-0.8-2.2-1.8-4.4-2.7-6.5" />
+                </g>
+            </svg>
+            <div class="right-streaks streaks"></div>
+        </div>
+        <!-- <div class="power"> -->
+               <!-- Toggle B -->
+    <div class="flex items-center justify-center w-full mb-12">
+
+        <label for="toggleB" class="flex items-center cursor-pointer">
+            <!-- toggle -->
+            <div class="relative">
+                <!-- input -->
+                <input type="checkbox" id="toggleB" class="sr-only">
+                <!-- line -->
+                <div class="block bg-gray-600 w-14 h-8 rounded-full"></div>
+                <!-- dot -->
+                <div class="dot absolute left-1 top-1 bg-white w-6 h-6 rounded-full transition"></div>
+            </div>
+        </label>
+
+    </div>
+        <!-- </div> -->
+
+    </div>
+    <script src="index.js" type="module"></script>
+</body>
+
+</html>
