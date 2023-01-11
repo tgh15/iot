@@ -18,7 +18,7 @@ const firebaseConfig = {
   storageBucket: "iot-project-fcc11.appspot.com",
   messagingSenderId: "19278660475",
   appId: "1:19278660475:web:b474ed77ac81fbd6bff3de",
-  measurementId: "G-E4BG7Z8G69"
+  measurementId: "G-E4BG7Z8G69",
 };
 
 // Initialize Firebase
@@ -27,6 +27,8 @@ const db = getDatabase(app);
 
 const body = document.querySelector("body");
 const checkBox = document.getElementById("toggleB");
+const arus = document.getElementById("arus");
+const daya = document.getElementById("daya");
 
 const dbRef = ref(db);
 
@@ -35,12 +37,20 @@ checkBox.addEventListener("change", function () {
     console.log(true);
     set(dbRef, {
       LED_STATUS: 1,
+      sensor: {
+        arus: 0,
+        daya: 0,
+      },
     });
     body.classList.add("active");
   } else {
     console.log(false);
     set(dbRef, {
       LED_STATUS: 0,
+      sensor: {
+        arus: 0,
+        daya: 0,
+      },
     });
     body.classList.remove("active");
   }
@@ -49,6 +59,9 @@ checkBox.addEventListener("change", function () {
 onValue(dbRef, (snapshot) => {
   const data = snapshot.val();
   console.log(data.LED_STATUS);
+  console.log(data.sensor);
+  arus.innerHTML = data.sensor.arus + " A";
+  daya.innerHTML = data.sensor.daya + " Watt";
   if (data.LED_STATUS) {
     checkBox.checked = true;
     body.classList.add("active");
