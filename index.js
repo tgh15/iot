@@ -11,13 +11,14 @@ import {
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyBQ48wb9YO1Zik_LaOgKvClB62THOIucvs",
-  authDomain: "iot-tes-cb168.firebaseapp.com",
-  databaseURL: "https://iot-tes-cb168.firebaseio.com",
-  projectId: "iot-tes-cb168",
-  storageBucket: "iot-tes-cb168.appspot.com",
-  messagingSenderId: "740767901331",
-  appId: "1:740767901331:web:aa31aecdbe82b0393c4f66",
+  apiKey: "AIzaSyAooiV-1_tM_iv11utRPmLIVGjHKk17ypw",
+  authDomain: "iot-project-fcc11.firebaseapp.com",
+  databaseURL: "https://iot-project-fcc11-default-rtdb.firebaseio.com",
+  projectId: "iot-project-fcc11",
+  storageBucket: "iot-project-fcc11.appspot.com",
+  messagingSenderId: "19278660475",
+  appId: "1:19278660475:web:b474ed77ac81fbd6bff3de",
+  measurementId: "G-E4BG7Z8G69",
 };
 
 // Initialize Firebase
@@ -26,6 +27,8 @@ const db = getDatabase(app);
 
 const body = document.querySelector("body");
 const checkBox = document.getElementById("toggleB");
+const arus = document.getElementById("arus");
+const daya = document.getElementById("daya");
 
 const dbRef = ref(db);
 
@@ -34,12 +37,20 @@ checkBox.addEventListener("change", function () {
     console.log(true);
     set(dbRef, {
       LED_STATUS: 1,
+      sensor: {
+        arus: 0,
+        daya: 0,
+      },
     });
     body.classList.add("active");
   } else {
     console.log(false);
     set(dbRef, {
       LED_STATUS: 0,
+      sensor: {
+        arus: 0,
+        daya: 0,
+      },
     });
     body.classList.remove("active");
   }
@@ -48,6 +59,9 @@ checkBox.addEventListener("change", function () {
 onValue(dbRef, (snapshot) => {
   const data = snapshot.val();
   console.log(data.LED_STATUS);
+  console.log(data.sensor);
+  arus.innerHTML = data.sensor.arus + " A";
+  daya.innerHTML = data.sensor.daya + " Watt";
   if (data.LED_STATUS) {
     checkBox.checked = true;
     body.classList.add("active");
